@@ -20,7 +20,10 @@ namespace Infrastructure.Data
         public async Task<Product> GetProductAsync(int id)
         {
             try{
-                return await _context.Products.FindAsync(id);
+                return await _context.Products
+                    .Include(p => p.Type)
+                    .Include(p => p.Brand)
+                    .FirstOrDefaultAsync(p => p.Id == id );
             }
 
             catch(Exception e){
@@ -31,15 +34,28 @@ namespace Infrastructure.Data
 
         }
 
+        public async Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync()
+        {
+            return await _context.ProductBrands.ToListAsync();
+        }
+
         public async Task<IReadOnlyList<Product>> GetProductsAsync()
         {
             try{
-                return await _context.Products.ToListAsync();
+                return await _context.Products
+                    .Include(p => p.Type)
+                    .Include(p => p.Brand)
+                    .ToListAsync();
             }
 
             catch(Exception e){
                 throw new System.NotImplementedException(e.Message);
             }
+        }
+
+        public async Task<IReadOnlyList<ProductType>> GetProductTypesAsync()
+        {
+            return await _context.ProductTypes.ToListAsync();
         }
     }
 }
