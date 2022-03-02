@@ -1,0 +1,20 @@
+<header *ngIf="this.totalCount > 0">
+  <span>Showing <strong>{{startVal}}</strong>-<strong>{{endVal}}</strong>  of <strong>{{totalCount}}</strong> Results</span>
+</header>
+<span *ngIf="this.totalCount == 0">There are <strong>0</strong> results!</span>
+<div class="row">
+  <div class="col-12">
+    <div class="form-inline mt-2 mr-4">
+      <input
+          id="searchForm"
+          #search
+          class="form-control"
+          style="width: 300px; display: inline;"
+          placeholder="Search" type="text">
+      <button (click)="onStartSearch()" class="btn btn-outline-primary" style="margin-left: 1em;">Search</button>
+      <button (click)="onStartReset()" class="btn btn-outline-success" style="margin-left: 1em;">Reset</button>
+    </div>
+  </div>
+</div>
+
+

@@ -40,9 +40,9 @@ namespace API.Middleware
                 var response = _env.IsDevelopment() ? new ApiException((int)HttpStatusCode.InternalServerError,
                 e.Message, e.StackTrace.ToString()) : new ApiException((int)HttpStatusCode.InternalServerError);
 
-                var json = JsonSerializer.Serialize(response);
+                //var json = JsonSerializer.Serialize(response);
 
-                await context.Response.WriteAsJsonAsync(json);
+                await context.Response.WriteAsJsonAsync(response);
             }
         }
 

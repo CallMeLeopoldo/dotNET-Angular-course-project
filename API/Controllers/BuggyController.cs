@@ -34,7 +34,7 @@ namespace API.Controllers
 
             var test = thing.ToString();
 
-            return Ok(); 
+            return Ok(new ApiResponse(500)); 
 
         }
 
@@ -43,7 +43,7 @@ namespace API.Controllers
         public ActionResult GetBadRequest()
         {
 
-            return BadRequest(); 
+            return BadRequest(new ApiResponse(400)); 
 
         }
 
@@ -51,7 +51,7 @@ namespace API.Controllers
         public ActionResult GetValidationError(int id)
         {
 
-            return Ok();  
+            return BadRequest(new ApiResponse(400));  
 
         }
 
