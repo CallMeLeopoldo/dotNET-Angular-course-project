@@ -22,7 +22,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         if(e){
           if(e.status === 400){
             if(e.error.errors){
-              console.log(e);
               err = e.error;
               throwError(() => e.error);
             }
@@ -38,12 +37,10 @@ export class ErrorInterceptor implements HttpInterceptor {
 
           if(e.status === 404){
             this.router.navigateByUrl('/notfounderror');
-            console.log('Not found goes through');
           }
           else if(e.status === 500){
             const navigationExtras: NavigationExtras = {state: {e: e.error}};
             this.router.navigateByUrl('/servererror', navigationExtras);
-            console.log('Server error goes through');
           }
 
           err = e;

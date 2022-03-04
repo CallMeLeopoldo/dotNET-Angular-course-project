@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { BreadcrumbService } from 'xng-breadcrumb';
+import { BasketService } from '../basket/basket.service';
 import { IProduct } from '../shared/models/product';
 import { ShopService } from '../shop/shop.service';
 
@@ -12,29 +13,50 @@ import { ShopService } from '../shop/shop.service';
 export class ProductDetailsComponent implements OnInit {
 
   product: IProduct;
+  quantity = 1;
 
   constructor(
     private shopService: ShopService,
     private activeRoute: ActivatedRoute,
-    private bcService: BreadcrumbService) {
+    private bcService: BreadcrumbService,
+    private basketService: BasketService) {
 
       this.bcService.set('@productDetails', ' ');
     }
 
-  ngOnInit(): void {~
-    console.log('UPA');
-    this.loadProduct(2);
+  ngOnInit(): void {
+    this.loadProduct();
   }
 
-  loadProduct(id: number){
-    console.log('UPAole');
-    this.shopService.getProduct(+this.activeRoute.snapshot.paramMap.get('id')).subscribe(
-      product => {
+  loadProduct(){
+    this.shopService.getProduct(+this.activeRoute.snapshot.paramMap.get('id')).subscribe({
+
+      next: product => {
         this.product = product;
         this.bcService.set('@productDetails', product.name);
-    }, error => {
-      console.log(error);
-    })
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+  }
+
+  onAddItemToBasket(){
+    this.basketService.addItemToBasket(this.product, this.quantity);
+  }
+
+  incrementQuantity(){
+    this.quantity++;
+  }
+
+  decrementQuantity(){
+    if(this.quantity <= 0){
+      this.quantity = 0;
+    }
+    else{
+      this.quantity--;
+    }
+
   }
 
 }

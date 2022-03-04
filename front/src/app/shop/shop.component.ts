@@ -42,7 +42,6 @@ export class ShopComponent implements OnInit {
   }
 
   onGetProducts(){
-    console.log(this.shopParams.searchTerm);
     return this.shopService.getProducts(this.shopParams).subscribe(
       (response: IPagination) => {
         this.products = response.data;

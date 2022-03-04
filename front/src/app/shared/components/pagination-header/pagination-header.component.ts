@@ -23,7 +23,6 @@ export class PaginationHeaderComponent implements DoCheck{
   constructor(private shopService: ShopService) { }
   ngDoCheck(): void {
     this.totalCount = this.shopService.count;
-    console.log("UPA ", this.totalCount, " HUE");
   }
 
   onChangeVal(event: {startVal: number, endVal: number}){
@@ -32,7 +31,6 @@ export class PaginationHeaderComponent implements DoCheck{
   }
 
   onStartSearch(){
-    console.log(this.searchTerm);
     this.searchTermEmitter.emit(this.searchTerm.nativeElement.value);
   }
 

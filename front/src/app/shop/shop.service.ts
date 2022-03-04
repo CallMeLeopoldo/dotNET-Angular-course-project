@@ -29,7 +29,7 @@ export class ShopService {
     if(shopParams.TypeId){
       params = params.append('typeId', shopParams.TypeId.toString());
     }
-    console.log(shopParams.searchTerm);
+
     if(shopParams.searchTerm){
       params = params.append('search', shopParams.searchTerm);
     }
@@ -37,18 +37,16 @@ export class ShopService {
     params = params.append('sort', shopParams.Sort);
     params = params.append('pageIndex', shopParams.PageNumber);
     params = params.append('pageSize', shopParams.PageSize);
-    console.log(params);
 
     return this.http.get<IPagination>(this.baseUrl + 'products', {observe: 'response', params})
       .pipe(
         map(
-          response => {this.count = response.body.data.length; console.log(response.body); return response.body;})
+          response => {this.count = response.body.data.length; return response.body;})
       );
   }
 
 
   getProduct(id: number){
-    console.log(this.http.get<IProduct>(this.baseUrl + 'products/' + id));
     return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
 

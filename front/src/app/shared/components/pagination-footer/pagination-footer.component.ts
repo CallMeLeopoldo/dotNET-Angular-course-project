@@ -31,10 +31,8 @@ export class PaginationFooterComponent implements OnInit {
   onSinglePageChange(change: number){
 
     const toChange = this.shopParams.PageNumber + change;
-    console.log("WOOPW " + toChange);
     if(toChange > 0 &&
       toChange < this.totalNumPages + 1){
-        console.log("GO TO " + toChange);
         this.shopParams.PageNumber = toChange;
         this.onSetProductNumbers();
         this.singlePage.emit(this.shopParams);
@@ -46,10 +44,8 @@ export class PaginationFooterComponent implements OnInit {
   onPageChange(change: number){
 
     const toChange = change;
-    console.log("WOOPW " + toChange);
     if(toChange > 0 &&
       toChange < this.totalNumPages + 1){
-        console.log("GO TO " + toChange);
         this.shopParams.PageNumber = toChange;
         this.onSetProductNumbers();
         this.changePage.emit(this.shopParams);
@@ -61,7 +57,6 @@ export class PaginationFooterComponent implements OnInit {
       (this.shopParams.PageNumber -1) * this.shopParams.PageSize + 1;
 
     this.shopParams.endVal =  this.shopParams.PageNumber * this.shopParams.PageSize;
-    console.log(this.totalCount);
     const diff = this.shopParams.endVal - this.totalCount;
 
     if(diff > 0){

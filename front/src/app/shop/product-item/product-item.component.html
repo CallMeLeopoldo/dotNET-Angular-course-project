@@ -2,7 +2,7 @@
   <div class="image position-relative" style="cursor:pointer">
     <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="img-fluid bg-info">
     <div class="d-flex justify-content-center align-items-center hover-overlay">
-      <button type="button" class="btn btn-sm btn-primary">
+      <button (click)="onAddItemToCart()" type="button" class="btn btn-sm btn-primary">
         <i class="fa fa-shopping-cart mr-2" aria-hidden="true"></i>
       </button>
       <button routerLink="/shop/{{product.id}}" type="button" class="btn btn-sm btn-primary">View</button>
