@@ -54,6 +54,10 @@ namespace API.Controllers
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
 
+        if(CheckEmailExists(registerDto.Email).Result.Value){
+            return new BadRequestObjectResult(new ApiValidationErrorResponse{Errors = new []{"Email address is already in use"}});
+        }
+
         var user = new AppUser
         {
             Email = registerDto.Email,
@@ -89,9 +93,8 @@ namespace API.Controllers
     }
 
     [HttpGet("emailexists")]
-    [Authorize]
     public async Task<ActionResult<bool>> CheckEmailExists([FromQuery] string email){
-
+        
         return await _userManager.FindByEmailAsync(email) != null;
 
     
